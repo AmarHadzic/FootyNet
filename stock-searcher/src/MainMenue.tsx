@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
+import { Card, CardContent, Typography, TextField, Button, Box } from '@mui/material';
+
+
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(query);
-  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="Search..."
-      />
-      <button type="submit">Search</button>
-    </form>
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="h2" align="center" gutterBottom>
+            Search for Stock
+          </Typography>
+          <TextField label="Enter stock symbol" variant="outlined" fullWidth />
+          <Button variant="contained" color="primary" fullWidth>
+            Search
+          </Button>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
