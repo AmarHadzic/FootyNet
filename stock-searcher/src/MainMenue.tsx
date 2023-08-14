@@ -11,7 +11,10 @@ const SoccerDataTest = () => {
   
     const handleSearch = () => {
       // Implement your search logic here using the searchTerm state
-
+      if (searchTerm.trim() !== ''){
+        fetchTeamData(searchTerm);
+      } 
+    
     };
   
     return (
@@ -30,9 +33,9 @@ const SoccerDataTest = () => {
     );
   };
 
-  useEffect(() => {
+  const fetchTeamData = (teamID) => {
     const apiKey = 'dcbbafaf17mshfa81437504a3302p12b9f2jsn3b790838cb47';
-    const url = 'https://api-football-v1.p.rapidapi.com/v3/teams?id=33';
+    const url = 'https://api-football-v1.p.rapidapi.com/v3/teams?id=${teamID}';
     const headers = {
       'X-RapidAPI-Key': apiKey,
       'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
@@ -58,6 +61,12 @@ const SoccerDataTest = () => {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+  };
+
+  useEffect(() => {
+    if (searchTerm) {
+      fetchTeamData(searchTerm);
+    }
   }, [searchTerm]);
 
   return (
